@@ -1,0 +1,21 @@
+[Unit]
+Description=ASUS Astral GPU Per-Pin Imbalance Watchdog
+Documentation=https://github.com/mario/astral-guard
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/lib/astral/astral_guard.py \
+    --threshold 1.0 \
+    --min-current 1.0 \
+    --sustain 3 \
+    --interval 1.0
+Restart=on-failure
+RestartSec=5
+User=root
+LimitNOFILE=256
+StandardError=journal
+SyslogIdentifier=astral-guard
+
+[Install]
+WantedBy=multi-user.target
