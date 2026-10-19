@@ -39,12 +39,44 @@ and performs an immediate hard power cut to protect the GPU.
 
 | Requirement | Notes |
 |---|---|
-| **GPU** | ASUS ROG Astral RTX 5090 or 5080 (has the IT8915FN chip) |
+| **GPU** | ASUS ROG Astral with ITE IT8915FN chip (see [Supported GPUs](#supported-gpus)) |
 | **OS** | Linux (tested on Fedora 44, any distro with I2C works) |
 | **Python** | 3.8+ (only stdlib — no pip installs) |
 | **I2C** | `i2c-dev` package, I2C bus device present |
 | **NVIDIA** | `nvidia-smi` available (PCI address mapping) |
 | **SysRq** | `/proc/sysrq-trigger` writable (root required) |
+
+
+### Supported GPUs
+
+The ITE IT8915FN per-pin power monitor chip is **exclusive to the ASUS ROG
+Astral product line**. No other ASUS card (Strix, TUF, ProArt, etc.) or
+third-party board carries it. The following models have been confirmed
+working with per-pin I2C reads:
+
+| PCI Subsystem | Model |
+|---|---|
+| `1043:89E3` | ROG Astral GeForce RTX 5090 OC |
+| `1043:89EA` | ROG Astral GeForce RTX 5090D OC |
+| `1043:89EC` | ROG Astral LC GeForce RTX 5090 |
+| `1043:8A61` | ROG Astral GeForce RTX 5090 Matrix |
+| `1043:8A2E` | ROG Astral GeForce RTX 5090 OC White |
+| `1043:8A5A` | ROG Astral GeForce RTX 5090 BTF OC |
+| `1043:8A3C` | ROG Astral GeForce RTX 5090 BTF OC (rev 2) |
+| `1043:89DE` | ROG Astral GeForce RTX 5080 OC |
+| `1043:8A2B` | ROG Astral GeForce RTX 5080 OC White |
+| `1043:8A45` | ROG Astral GeForce RTX 5080 OC Hatsune Miku |
+| `1043:89DF` | ROG Astral GeForce RTX 5080 (non-OC) |
+
+> **Note:** astral-guard does not check PCI subsystem IDs — it probes the
+> I2C bus at address `0x2B` for a valid IT8915FN response (≥ 10 V reading).
+> If the chip answers, the card is supported regardless of SKU. The table
+> above is for your reference to confirm your card has the chip.
+>
+> **BTF caveat:** For BTF (back-to-front) variants, the card-side IT8915FN
+> sensors may not carry the full load if the motherboard's GC-HPWR slot
+> power path is used. Per-pin readings will still work but may under-report
+> the actual connector stress.
 
 ### Fedora / RHEL
 
