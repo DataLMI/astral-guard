@@ -1,6 +1,6 @@
 [Unit]
 Description=ASUS Astral GPU Per-Pin Imbalance Watchdog
-Documentation=https://github.com/mario/astral-guard
+Documentation=https://github.com/DataLMI/astral-guard
 After=multi-user.target
 
 [Service]

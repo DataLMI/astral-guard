@@ -93,7 +93,7 @@ sudo apt install i2c-tools
 ## Installation
 
 ```bash
-git clone https://github.com/<your-username>/astral-guard.git
+git clone https://github.com/DataLMI/astral-guard.git
 cd astral-guard
 ./install.sh
 ```
