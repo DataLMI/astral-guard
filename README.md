@@ -15,9 +15,9 @@ and performs an immediate hard power cut to protect the GPU.
 │  ASUS ROG Astral PCB                                        │
 │                                                             │
 │   12V-2x6 #1 ──┐                                            │
-│   12V-2x6 #2 ──┤──►  ITE IT8915FN  ──►  I2C bus (0x2B)    │
-│   12V-2x6 #3 ──┘       (power mon.)      │                 │
-│                                          ▼                 │
+│   12V-2x6 #2 ──┤──►  ITE IT8915FN  ──►  I2C bus (0x2B)      │
+│   12V-2x6 #3 ──┘       (power mon.)      │                  │
+│                                          ▼                  │
 │                                    astral_guard.py          │
 │                                    (root, systemd)          │
 │                                                             │
